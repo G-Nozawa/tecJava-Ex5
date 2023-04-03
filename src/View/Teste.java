@@ -17,11 +17,11 @@ public class Teste {
 
         // Lista todos os livros cadastrados
         Livro[] livros = livroController.listarLivros();
-        for(int i = 0; i < livros.length; i++){
-            if(livros[i] != null){
-                System.out.println("Nome: " + livros[i].getNome());
-                System.out.println("Descrição: " + livros[i].getDescricao());
-                System.out.println("Quantidade: " + livros[i].getQuantidade());
+        for (Livro value : livros) {
+            if (value != null) {
+                System.out.println("Nome: " + value.getNome());
+                System.out.println("Descrição: " + value.getDescricao());
+                System.out.println("Quantidade: " + value.getQuantidade());
                 System.out.println("----------------------------");
             }
         }
