@@ -2,10 +2,12 @@ package View;
 
 import Controller.LivroController;
 import Model.Livro;
+import Serialization.Storage;
 
 public class Teste {
     public static void main(String[] args) {
         LivroController livroController = new LivroController();
+//        livroController.setLivros(Storage.carregarDados());
 
         // Cria um livro
         Livro livro = livroController.criarLivro("Livro 1", "Descrição do livro 1", 10);
@@ -23,5 +25,7 @@ public class Teste {
                 System.out.println("----------------------------");
             }
         }
+
+        Storage.salvarDados(livros);
     }
 }

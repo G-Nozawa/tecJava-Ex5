@@ -40,6 +40,10 @@ public class LivroController {
         }
     }
 
+    public void setLivros(Livro[] livros) {
+        this.livros = livros;
+    }
+
     // Cria um livro
     public Livro criarLivro(String nome, String descricao, int quantidade){
         Livro livro = new Livro(nome, descricao, quantidade);

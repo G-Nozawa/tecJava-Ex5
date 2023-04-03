@@ -1,6 +1,8 @@
 package Model;
 
-public class Livro {
+import java.io.Serializable;
+
+public class Livro implements Serializable {
     private String nome;
     private String descricao;
     private int quantidade;
@@ -35,5 +37,5 @@ public class Livro {
         this.quantidade = quantidade;
     }
 
-    
+
 }
