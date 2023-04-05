@@ -6,7 +6,7 @@ public class LivroController {
     private Livro[] livros;
 
     public LivroController(){
-        livros = new Livro[10];
+        livros = new Livro[100];
     }
 
     public void cadastrarLivro(Livro livro){

@@ -5,17 +5,29 @@
  */
 package View;
 
+import Controller.LivroController;
+import Model.Livro;
+
+import Controller.CarroController;
+import Model.Carro;
+
+import Serialization.Storage;
 /**
  *
  * @author Nozawa
  */
 public class View extends javax.swing.JFrame {
-
+    LivroController livroController;
+    CarroController carroController;
     /**
      * Creates new form View
      */
     public View() {
         initComponents();
+        livroController = new LivroController();
+        livroController.setLivros(Storage.carregarDadosLivros());
+        carroController = new CarroController();
+        carroController.setCarros(Storage.carregarDadosCarros());
     }
 
     /**
@@ -27,7 +39,57 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuLivro = new javax.swing.JMenu();
+        menuCadastrarLivro = new javax.swing.JMenuItem();
+        menuVisualizarLivro = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuCadastrarVeiculo = new javax.swing.JMenuItem();
+        menuVisualizarVeiculo = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        menuLivro.setText("Livro");
+
+        menuCadastrarLivro.setText("Cadastrar Livros");
+        menuCadastrarLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastrarLivroActionPerformed(evt);
+            }
+        });
+        menuLivro.add(menuCadastrarLivro);
+
+        menuVisualizarLivro.setText("Visualizar Livros");
+        menuVisualizarLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVisualizarLivroActionPerformed(evt);
+            }
+        });
+        menuLivro.add(menuVisualizarLivro);
+
+        jMenuBar1.add(menuLivro);
+
+        jMenu2.setText("Carro");
+
+        menuCadastrarVeiculo.setText("Cadastrar Veículo");
+        menuCadastrarVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastrarVeiculoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuCadastrarVeiculo);
+
+        menuVisualizarVeiculo.setText("Visualizar Veículo");
+        menuVisualizarVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVisualizarVeiculoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuVisualizarVeiculo);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +99,52 @@ public class View extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuCadastrarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarLivroActionPerformed
+        ViewCadastroLivro viewCadastro = new ViewCadastroLivro(livroController);
+        viewCadastro.setVisible(true);
+    }//GEN-LAST:event_menuCadastrarLivroActionPerformed
+
+    private void menuVisualizarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVisualizarLivroActionPerformed
+        String dados = "";
+        Livro[] livros = livroController.listarLivros();
+        for(Livro livro: livros){
+            if(livro != null){
+                dados += "Nome: " + livro.getNome() + "\n";
+                dados += "Descrição: " + livro.getDescricao() + "\n";
+                dados += "Quantidade: " + livro.getQuantidade() + "\n";
+                dados += "----------------------------\n";
+            }
+        }
+        
+        ViewVisualizar viewVisualizar = new ViewVisualizar("Livros", dados);
+        viewVisualizar.setVisible(true);
+    }//GEN-LAST:event_menuVisualizarLivroActionPerformed
+
+    private void menuVisualizarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVisualizarVeiculoActionPerformed
+        String dados = "";
+        Carro[] carros = carroController.listarCarros();
+        for(Carro carro: carros){
+            if(carro != null){
+                dados += "Placa: " + carro.getPlaca() + "\n";
+                dados += "Modelo: " + carro.getPlaca() + "\n";
+                dados += "----------------------------\n";
+            }
+        }
+        
+        ViewVisualizar viewVisualizar = new ViewVisualizar("Carros Estacionados", dados);
+        viewVisualizar.setVisible(true);
+    }//GEN-LAST:event_menuVisualizarVeiculoActionPerformed
+
+    private void menuCadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarVeiculoActionPerformed
+        ViewCadastroVeiculo viewCadastro = new ViewCadastroVeiculo(carroController);
+        viewCadastro.setVisible(true);
+    }//GEN-LAST:event_menuCadastrarVeiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +182,12 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuCadastrarLivro;
+    private javax.swing.JMenuItem menuCadastrarVeiculo;
+    private javax.swing.JMenu menuLivro;
+    private javax.swing.JMenuItem menuVisualizarLivro;
+    private javax.swing.JMenuItem menuVisualizarVeiculo;
     // End of variables declaration//GEN-END:variables
 }
